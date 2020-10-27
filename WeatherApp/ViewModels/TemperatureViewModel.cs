@@ -23,12 +23,12 @@ namespace WeatherApp.ViewModels
             TemperatureService = itmps;
         }
 
-        public double CelsiusInFahrenheit(double c)
+        public static double CelsiusInFahrenheit(double c)
         {
             return c * (9d / 5d) + 32d;
         }
 
-        public double FahrenheitInCelsius(double f)
+        public static double FahrenheitInCelsius(double f)
         {
             return (f - 32d) * 5d / 9d;
         }
