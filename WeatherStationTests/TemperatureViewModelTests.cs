@@ -31,8 +31,10 @@ namespace WeatherStationTests
             // Arrange
 
             // Act       
+            var actual = _sut.CelsiusInFahrenheit(C);
 
             // Assert
+            Assert.Equal(expected, actual, 1);
 
             /// TODO : git commit -a -m "T01 CelsisInFahrenheit_AlwaysReturnGoodValue : Done"
         }
