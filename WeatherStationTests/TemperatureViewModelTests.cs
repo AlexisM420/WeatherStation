@@ -34,13 +34,13 @@ namespace WeatherStationTests
         public void CelsiusInFahrenheit_AlwaysReturnGoodValue(double C, double expected)
         {
             // Arrange
-            /*
+            
             // Act       
-            var actual = _sut.CelsiusInFahrenheit(C);
+            var actual = TemperatureViewModel.CelsiusInFahrenheit(C);
 
             // Assert
             Assert.Equal(expected, actual, 1);
-            */
+            
             /// TODO : git commit -a -m "T01 CelsisInFahrenheit_AlwaysReturnGoodValue : Done"
         }
 
@@ -60,13 +60,13 @@ namespace WeatherStationTests
         public void FahrenheitInCelsius_AlwaysReturnGoodValue(double F, double expected)
         {
             // Arrange
-            /*
+            
             // Act       
-            var actual = _sut.FahrenheitInCelsius(F);
+            var actual = TemperatureViewModel.FahrenheitInCelsius(F);
 
             // Assert
             Assert.Equal(expected, actual, 1);
-            */
+            
             /// TODO : git commit -a -m "T02 FahrenheitInCelsius_AlwaysReturnGoodValue : Done"
         }
 
@@ -152,10 +152,16 @@ namespace WeatherStationTests
         public void GetTempCommand_HaveCurrentTempWhenExecuted_ShouldPass()
         {
             // Arrange
+            Mock<ITemperatureService> itmpsM = new Mock<ITemperatureService>();
+            itmpsM.Setup(x => x.GetTempAsync()).Returns(Task.FromResult(new TemperatureModel()));
 
-            // Act       
+            // Act      
+            _sut.SetTemperatureService(itmpsM.Object);
+            _sut.GetTempCommand.Execute("");
+            var a =_sut.CurrentTemp;
 
             // Assert
+            Assert.NotNull(a);
 
             /// TODO : git commit -a -m "T07 GetTempCommand_HaveCurrentTempWhenExecuted_ShouldPass : Done"
         }

@@ -12,11 +12,18 @@ namespace WeatherApp.ViewModels
         /// TODO : Ajoutez le code nécessaire pour réussir les tests et répondre aux requis du projet
         /// 
         public ITemperatureService TemperatureService;
-        public DelegateCommand<string> GetTempCommand {
-            get { return null; }
-            set {  } 
-        }
+        public DelegateCommand<string> GetTempCommand { get; set; }
         public TemperatureModel CurrentTemp { get; set; }
+
+        public TemperatureViewModel()
+        {
+            GetTempCommand = new DelegateCommand<string>(GetTempData);
+        }
+
+        private async void GetTempData(string obj)
+        {
+            CurrentTemp = await TemperatureService.GetTempAsync();
+        }
 
         public void SetTemperatureService(ITemperatureService itmps)
         {
