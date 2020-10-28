@@ -81,7 +81,7 @@ namespace WeatherStationTests
             // Act       
 
             // Assert
-            Assert.Throws<NullException>(()=>_sut.GetTempCommand.Execute(null));
+            Assert.Throws<NullReferenceException>(()=>_sut.GetTempCommand.Execute(null));
 
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }
