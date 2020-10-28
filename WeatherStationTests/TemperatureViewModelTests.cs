@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
+using WeatherApp.Models;
 using WeatherApp.Services;
 using WeatherApp.ViewModels;
 using Xunit;
@@ -130,10 +132,14 @@ namespace WeatherStationTests
         public void SetTemperatureService_WhenExecuted_TemperatureServiceIsNotNull()
         {
             // Arrange
+            Mock<ITemperatureService> itmpsM = new Mock<ITemperatureService>();
+            itmpsM.Setup(x => x.GetTempAsync()).Returns(Task.FromResult(new TemperatureModel()));
 
             // Act       
+            _sut.SetTemperatureService(itmpsM.Object);
 
             // Assert
+            Assert.NotNull(_sut.TemperatureService);
 
             /// TODO : git commit -a -m "T06 SetTemperatureService_WhenExecuted_TemperatureServiceIsNotNull : Done"
         }
