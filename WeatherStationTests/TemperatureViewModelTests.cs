@@ -83,7 +83,7 @@ namespace WeatherStationTests
             // Act       
 
             // Assert
-            Assert.Throws<NullReferenceException>(()=>_sut.GetTempCommand.Execute(null));
+            Assert.Throws<NullReferenceException>(()=>_sut.GetTempCommand.Execute(String.Empty));
 
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }
@@ -123,7 +123,7 @@ namespace WeatherStationTests
 
             /// TODO : git commit -a -m "T05 CanGetTemp_WhenServiceIsSet_ReturnsTrue : Done"
         }
-
+        
         /// <summary>
         /// TemperatureService ne devrait plus être null lorsque SetTemperatureService
         /// </summary>
@@ -157,7 +157,7 @@ namespace WeatherStationTests
 
             // Act      
             _sut.SetTemperatureService(itmpsM.Object);
-            _sut.GetTempCommand.Execute("");
+            _sut.GetTempCommand.Execute(String.Empty);
             var a =_sut.CurrentTemp;
 
             // Assert

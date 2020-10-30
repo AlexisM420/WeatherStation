@@ -12,7 +12,19 @@ namespace WeatherApp.ViewModels
         /// TODO : Ajoutez le code nécessaire pour réussir les tests et répondre aux requis du projet
         /// 
         public ITemperatureService TemperatureService;
-        public DelegateCommand<string> GetTempCommand { get; set; }
+        private async void CanGetTemp(Object o)
+        {
+            CurrentTemp = await TemperatureService.GetTempAsync();
+        }
+        public DelegateCommand<string> GetTempCommand {
+            get
+            {
+                if (TemperatureService == null)
+                    throw new NullReferenceException();
+                return new DelegateCommand<string>(CanGetTemp);
+            }
+            private set { } 
+        }
         public TemperatureModel CurrentTemp { get; set; }
 
         public TemperatureViewModel()
@@ -42,7 +54,8 @@ namespace WeatherApp.ViewModels
 
         public bool CanGetTemp()
         {
-            if (TemperatureService == null) return false;
+            if (TemperatureService == null) 
+                return false;
             return true;
         }
     }
